@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Space.gd" type="Script" id=1]
+
+[node name="Space" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_left = -50.0
+margin_top = -50.0
+margin_right = 50.0
+margin_bottom = 50.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Click Detector" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Click Detector"]
+visible = false
+polygon = PoolVector2Array( -50, -50, 50, -50, 50, 50, -50, 50 )
+[connection signal="input_event" from="Click Detector" to="." method="_on_Click_Detector_input_event"]
+[connection signal="mouse_entered" from="Click Detector" to="." method="_on_Click_Detector_mouse_entered"]
+[connection signal="mouse_exited" from="Click Detector" to="." method="_on_Click_Detector_mouse_exited"]

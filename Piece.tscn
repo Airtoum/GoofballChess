@@ -1,0 +1,34 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Piece.gd" type="Script" id=1]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 50, 50 )
+
+[node name="Piece" type="Node2D"]
+z_index = 10
+script = ExtResource( 1 )
+hover_color = Color( 1, 0.866667, 0, 1 )
+select_color = Color( 0, 1, 0, 1 )
+
+[node name="PieceInternals" type="Node2D" parent="."]
+
+[node name="Click Detector" type="Area2D" parent="PieceInternals"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PieceInternals/Click Detector"]
+shape = SubResource( 1 )
+
+[node name="ColorRect" type="ColorRect" parent="PieceInternals"]
+visible = false
+margin_left = -50.0
+margin_top = -50.0
+margin_right = 50.0
+margin_bottom = 50.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ClickTimer" type="Timer" parent="PieceInternals"]
+[connection signal="input_event" from="PieceInternals/Click Detector" to="." method="_on_Click_Detector_input_event"]
+[connection signal="mouse_entered" from="PieceInternals/Click Detector" to="." method="_on_Click_Detector_mouse_entered"]
+[connection signal="mouse_exited" from="PieceInternals/Click Detector" to="." method="_on_Click_Detector_mouse_exited"]

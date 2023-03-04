@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://PieceComponent.gd" type="Script" id=1]
+
+[node name="CanMoveToSpaces" type="Node"]
+script = ExtResource( 1 )
+component_name = "CanMoveToSpaces"
