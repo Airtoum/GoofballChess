@@ -1,6 +1,6 @@
 extends PieceComponent
 
-
+class_name PC_SnapToMousedSpace
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -8,7 +8,7 @@ func _ready():
 
 
 # Snaps to the moused over space
-func when_dropped(piece):
+func when_dropped(piece: Piece):
 	if not piece.board:
 		return
 	var spaces = piece.board.spaces

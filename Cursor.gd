@@ -1,11 +1,11 @@
 extends Node2D
 
 
-export(PackedScene) var InfoBoxTitle
-export(PackedScene) var InfoBoxText
-export(PackedScene) var InfoBoxMargin
+@export var InfoBoxTitle: PackedScene
+@export var InfoBoxText: PackedScene
+@export var InfoBoxMargin: PackedScene
 
-onready var InfoBox = $InfoBox
+@onready var InfoBox = $InfoBox
 
 
 var expanding_piece = null
@@ -24,7 +24,7 @@ func _process(delta):
 	if expanding_piece:
 		expand_timer += delta
 	var progress = 1 if $ExpandTimer.is_stopped() else $ExpandTimer.time_left/$ExpandTimer.wait_time
-	$TextureProgress.value = 100 * (1 - progress)
+	$TextureProgressBar.value = 100 * (1 - progress)
 	if Cameranator.current:
 		scale = Cameranator.current.zoom
 
@@ -36,14 +36,14 @@ func clear_expand(piece):
 	self.expanding_piece = null
 	$ExpandTimer.stop()
 	$ColorRect.hide()
-	$TextureProgress.show()
+	$TextureProgressBar.show()
 	for child in InfoBox.get_children():
 		if not child is ColorRect:
 			child.queue_free()
 
 
 func _on_ExpandTimer_timeout():
-	$TextureProgress.hide()
+	$TextureProgressBar.hide()
 	$ColorRect.show()
 	InfoBox.show()
 	generate_info()
@@ -66,19 +66,19 @@ func generate_info():
 			else:
 				add_description(elements, component.description, priority if priority else 50)
 	
-	elements.sort_custom(self, "element_sort")
+	elements.sort_custom(Callable(self,"element_sort"))
 	for element in elements:
 		InfoBox.add_child(element[0])
 	
 	if InfoBox.get_child_count() > 0:
 		var last_element = InfoBox.get_child(InfoBox.get_child_count() - 1)
-		var top_margin = last_element.get("custom_constants/margin_top")
-		last_element.set("custom_constants/margin_bottom", top_margin)
+		var top_margin = last_element.get("theme_override_constants/margin_top")
+		last_element.set("theme_override_constants/margin_bottom", top_margin)
 	
 	call_deferred("update_background")
 
 func update_background():
-	$ColorRect.rect_size = $InfoBox.rect_size
+	$ColorRect.size = $InfoBox.size
 	
 func search_regex(pattern, string):
 	var regex = RegEx.new()
@@ -95,12 +95,14 @@ func element_sort(a, b):
 	return false
 
 func add_element(all_elements, element, priority=50):
-	var margin = InfoBoxMargin.instance()
+	var margin = InfoBoxMargin.instantiate()
 	margin.add_child(element)
 	all_elements.append([margin, priority])
 
 func add_description(all_elements, description, priority=50):
-	var text = InfoBoxText.instance()
+	if len(description) == 0:
+		return
+	var text = InfoBoxText.instantiate()
 	text.text = description
 	add_element(all_elements, text, priority)
 
@@ -109,6 +111,6 @@ func add_image(all_elements, component, priority=10):
 	add_element(all_elements, image, priority)
 
 func add_title(all_elements, title_text, priority=0):
-	var title = InfoBoxTitle.instance()
+	var title = InfoBoxTitle.instantiate()
 	title.text = title_text
 	add_element(all_elements, title, priority)

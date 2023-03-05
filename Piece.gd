@@ -1,14 +1,16 @@
 extends Node2D
 
 class_name Piece
-func get_class(): return "Piece"
 
-onready var ClickTimer = $PieceInternals/ClickTimer
 
-export(String) var piece_name
+@onready var ClickTimer = $PieceInternals/ClickTimer
 
-export(Color) var hover_color
-export(Color) var select_color
+@export var piece_name: String
+
+@export var hover_color: Color
+@export var select_color: Color
+
+var all_piece_components: AllPieceComponents = AllPieceComponents.new(self)
 
 var moused_over
 var selected
@@ -22,7 +24,7 @@ var board = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	if get_parent().get_class() == "Board":
+	if get_parent() is Board:
 		add_to_board(get_parent())
 
 func add_to_board(new_board):
@@ -50,7 +52,7 @@ func _process(delta):
 	var mouse_pos = get_global_mouse_position()
 	if dragged:
 		self.global_position = mouse_pos + drag_offset
-	 
+
 
 func _input(event):
 	var mouse_pos = get_global_mouse_position()
@@ -60,7 +62,7 @@ func _input(event):
 				dragged = true
 				drag_offset = self.global_position - mouse_pos
 				drag_start = self.position
-				get_tree().set_input_as_handled()
+				get_viewport().set_input_as_handled()
 				Cursor.clear_expand(self)
 				ClickTimer.start()
 				screen_click_start = event.position
@@ -93,48 +95,66 @@ func _on_Click_Detector_mouse_exited():
 	moused_over = false
 	Cursor.clear_expand(self)
 
+class AllPieceComponents:
+	var child_idx: int
+	var node: Node
+	func _init(node: Node):
+		self.child_idx = 0
+		self.node = node
+	func should_continue():
+		return self.child_idx < self.node.get_child_count()
+	func find_next_piece_component(arg):
+		if not should_continue():
+			return false
+		if not self.node.get_child(self.child_idx) is PieceComponent:
+			return self._iter_next(arg)
+		return should_continue()
+	func _iter_init(arg):
+		self.child_idx = 0
+		return find_next_piece_component(arg)
+	func _iter_next(arg):
+		self.child_idx += 1
+		return find_next_piece_component(arg)
+	func _iter_get(arg) -> PieceComponent:
+		return self.node.get_child(self.child_idx)
 
 func emit_dropped():
-	for child in get_children():
-		if child is PieceComponent:
-			child.call("when_dropped", self)
+	for component in all_piece_components:
+		component.when_dropped(self)
 
-func emit_try_move():
-	for child in get_children():
-		if child is PieceComponent:
-			if not child.call("when_try_move", self):
-				return false
+func emit_try_move() -> bool:
+	for component in all_piece_components:
+		if not component.when_try_move(self):
+			return false
 	return true
 
 func emit_moved():
-	for child in get_children():
-		if child is PieceComponent:
-			child.call("when_moved", self)
-			
+	for component in all_piece_components:
+		component.when_moved(self)
+
 func emit_dragged():
-	for child in get_children():
-		if child is PieceComponent:
-			child.call("when_dragged", self)
-			
+	for component in all_piece_components:
+		component.when_dragged(self)
+
 func emit_get_moves():
 	var list_of_moves = []
-	for child in get_children():
-		if child is PieceComponent:
-			child.call("when_get_moves", self, list_of_moves)
+	for component in all_piece_components:
+		component.when_get_moves(self, list_of_moves)
 
-func has_component(name):
-	for child in get_children():
-		if child is PieceComponent:
-			if child.component_name == name:
-				return true
+func has_component(name) -> bool:
+	for component in all_piece_components:
+		if component.component_name == name:
+			return true
 	return false
 	
 func get_component(name) -> PieceComponent:
-	for child in get_children():
-		if child is PieceComponent:
-			if child.component_name == name:
-				return child as PieceComponent
+	for component in all_piece_components:
+		if component.component_name == name:
+			return component
 	return null
 
-func _on_Click_Detector_input_event(viewport, event, shape_idx):
+
+func _on_click_detector_input_event(viewport, event, shape_idx):
 	pass # Replace with function body.
+
+

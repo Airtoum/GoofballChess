@@ -1,27 +1,27 @@
+@icon("res://Editor/BehaviourIcon.svg")
 extends Node
 
-class_name PieceComponent, "res://Editor/BehaviourIcon.svg"
-func get_class(): return "PieceComponent"
+class_name PieceComponent
 
-export(String) var component_name
-export(String, MULTILINE) var description
+@export var component_name: StringName
+@export_multiline var description: String
 
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
 
 
-func when_dropped(piece):
+func when_dropped(piece: Piece):
 	pass
 	
-func when_try_move(piece):
+func when_try_move(piece: Piece) -> bool:
 	return true
 	
-func when_moved(piece):
+func when_moved(piece: Piece):
 	pass
 
-func when_dragged(piece):
+func when_dragged(piece: Piece):
 	pass
 	
-func when_get_moves(piece, list_of_moves):
+func when_get_moves(piece: Piece, list_of_moves):
 	pass

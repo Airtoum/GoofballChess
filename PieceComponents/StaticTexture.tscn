@@ -1,19 +1,16 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=2 format=3 uid="uid://l5r0ewjba2y1"]
 
-[ext_resource path="res://PieceComponents/StaticTexture.gd" type="Script" id=1]
+[ext_resource type="Script" path="res://PieceComponents/StaticTexture.gd" id="1"]
 
 [node name="StaticTexture" type="TextureRect"]
-margin_left = -50.0
-margin_top = -50.0
-margin_right = 50.0
-margin_bottom = 50.0
-rect_min_size = Vector2( 100, 100 )
+custom_minimum_size = Vector2(100, 100)
+offset_left = -50.0
+offset_top = -50.0
+offset_right = 50.0
+offset_bottom = 50.0
 mouse_filter = 2
-expand = true
+expand_mode = 1
 stretch_mode = 5
-script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-component_name = "StaticTexture"
+script = ExtResource("1")
+component_name = &"StaticTexture"
 description = "<texture>"

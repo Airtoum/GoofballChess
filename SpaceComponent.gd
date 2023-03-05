@@ -1,10 +1,10 @@
+@icon("res://Editor/BehaviourIcon.svg")
 extends Node
 
-class_name SpaceComponent, "res://Editor/BehaviourIcon.svg"
-func get_class(): return "SpaceComponent"
+class_name SpaceComponent
 
-export(String) var component_name
-export(String, MULTILINE) var description
+@export var component_name: String
+@export_multiline var description: String
 
 # Declare member variables here. Examples:
 # var a = 2

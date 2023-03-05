@@ -1,10 +1,10 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=2 format=3 uid="uid://bcn6vvdq13dfg"]
 
-[sub_resource type="GDScript" id=1]
+[sub_resource type="GDScript" id="1"]
 script/source = "extends Label
 
 
-export(String) var debug_path
+@export var debug_path: String
 var node
 
 
@@ -23,8 +23,9 @@ func _process(delta):
 "
 
 [node name="DebugLabel" type="Label"]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 text = "Debug Text"
-script = SubResource( 1 )
+script = SubResource("1")
 debug_path = ".:text"

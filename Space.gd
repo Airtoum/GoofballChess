@@ -1,15 +1,24 @@
 extends Node2D
 
 class_name Space
-func get_class(): return "Space"
+
+# directions are bitmasks! this makes diagonals easier at the cost of a few nonsense directions
+const FORWARD 	= 1 << 0
+const BACKWARD 	= 1 << 1
+const LEFT 		= 1 << 2
+const RIGHT 	= 1 << 3
+const UP		= 1 << 4
+const DOWN		= 1 << 5
+const DIRECTIONS_END = 1 << 6
 
 var board = null
 
 var moused_over = false
+var neighbors: Dictionary = {} # Dict of [ints (dir bitmasks), arrays of spaces]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	if get_parent().get_class() == "Board":
+	if get_parent() is Board:
 		add_to_board(get_parent())
 
 func add_to_board(new_board):
@@ -25,6 +34,16 @@ func remove_from_board():
 	if (board):
 		board.remove_space(self)
 	board = null
+	
+func add_neighbor(direction: int, space: Space):
+	if not neighbors.has(direction):
+		neighbors[direction] = Array()
+	neighbors[direction].append(space)
+	
+func remove_neighbor(direction: int, space: Space):
+	if not neighbors.has(direction):
+		push_error("This direction was never established")
+	neighbors[direction].erase(space)
 	
 func piece_entered(piece):
 	print("space entered!")

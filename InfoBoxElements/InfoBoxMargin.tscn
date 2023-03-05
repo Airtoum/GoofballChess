@@ -1,9 +1,7 @@
-[gd_scene format=2]
+[gd_scene format=3 uid="uid://bb1h25gg2ng5u"]
 
 [node name="MarginContainer" type="MarginContainer"]
-custom_constants/margin_right = 10
-custom_constants/margin_top = 10
-custom_constants/margin_left = 10
-__meta__ = {
-"_edit_use_anchors_": false
-}
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 0

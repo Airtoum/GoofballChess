@@ -1,7 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=2 format=3 uid="uid://cern4sg6opd8j"]
 
-[ext_resource path="res://PieceComponents/SnapToMousedSpace.gd" type="Script" id=1]
+[ext_resource type="Script" path="res://PieceComponents/SnapToMousedSpace.gd" id="1"]
 
 [node name="SnapToMousedSpace" type="Node"]
-script = ExtResource( 1 )
+script = ExtResource("1")
 component_name = "SnapToMousedSpace"

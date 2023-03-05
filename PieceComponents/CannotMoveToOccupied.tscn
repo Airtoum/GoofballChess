@@ -1,9 +1,9 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=2 format=3 uid="uid://dvm4cjiwmro84"]
 
-[ext_resource path="res://PieceComponents/CannotMoveToOccupied.gd" type="Script" id=1]
+[ext_resource type="Script" path="res://PieceComponents/CannotMoveToOccupied.gd" id="1"]
 
 [node name="CannotMoveToOccupied" type="Node"]
-script = ExtResource( 1 )
+script = ExtResource("1")
 component_name = "CannotMoveToOccupied"
 description = "<event:when try move>
 Cannot move to an occupied space"

@@ -1,6 +1,6 @@
 extends PieceComponent
 
-
+class_name PC_SnapToSpace
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -8,7 +8,7 @@ func _ready():
 
 
 # Snaps to the nearest space
-func when_dropped(piece):
+func when_dropped(piece: Piece):
 	var spaces = piece.board.spaces
 	var nearest_distance = INF
 	var nearest_space = null

@@ -1,7 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=2 format=3 uid="uid://m118c3rtmt8d"]
 
-[ext_resource path="res://PieceComponent.gd" type="Script" id=1]
+[ext_resource type="Script" path="res://PieceComponent.gd" id="1"]
 
 [node name="CanMoveOverNothing" type="Node"]
-script = ExtResource( 1 )
+script = ExtResource("1")
 component_name = "CanMoveOverNothing"

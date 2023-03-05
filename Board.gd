@@ -1,16 +1,15 @@
 extends Node
 
 class_name Board
-func get_class(): return "Board"
 
 enum BoardGenerationType {NONE, STANDARD, FOURPLAYER}
-export(BoardGenerationType) var board_generation
-export(PackedScene) var WhiteSpace
-export(PackedScene) var BlackSpace
+@export var board_generation: BoardGenerationType
+@export var WhiteSpace: PackedScene
+@export var BlackSpace: PackedScene
 
 var game = null
-var pieces = []
-var spaces = []
+var pieces: Array[Piece] = []
+var spaces: Array[Space] = []
 
 var pieces_by_pos = {}
 var spaces_by_pos = {}
@@ -20,14 +19,16 @@ func _ready():
 	if board_generation:
 		for i in range(8):
 			for j in range(8):
-				var new_space
+				var new_space: Space
 				if (i + j) % 2 == 0:
-					new_space = WhiteSpace.instance()
+					new_space = WhiteSpace.instantiate()
 				else:
-					new_space = BlackSpace.instance()
+					new_space = BlackSpace.instantiate()
 				self.add_child(new_space)
-				new_space.position = Vector2(100 * i, 100 * j)
+				var pos = Vector2(100 * i, 100 * j)
+				new_space.position = pos
 				move_space(new_space, Vector2.ZERO, new_space.position)
+				new_space.add_neighbor(Space.BACKWARD & Space.LEFT, spaces_by_pos[pos + Vector2(-100, -100)])
 			
 
 func add_to_game(new_game):

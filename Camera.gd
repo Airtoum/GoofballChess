@@ -1,7 +1,7 @@
 extends Camera2D
 
 
-export(float) var speed = 40
+@export var speed: float = 40
 
 
 # Called when the node enters the scene tree for the first time.
