@@ -1,25 +1,26 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=2 format=3 uid="uid://b0mm6l15d27ll"]
 
-[ext_resource path="res://Space.gd" type="Script" id=1]
+[ext_resource type="Script" path="res://Space.gd" id="1"]
 
 [node name="Space" type="Node2D"]
-script = ExtResource( 1 )
+script = ExtResource("1")
+facets = Array[int]([1, 2, 4, 8])
+ridges = Array[int]([5, 9, 6, 10])
 
 [node name="ColorRect" type="ColorRect" parent="."]
+z_index = -1
 offset_left = -50.0
 offset_top = -50.0
 offset_right = 50.0
 offset_bottom = 50.0
 mouse_filter = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Click Detector" type="Area2D" parent="."]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Click Detector"]
 visible = false
-polygon = PackedVector2Array( -50, -50, 50, -50, 50, 50, -50, 50 )
+polygon = PackedVector2Array(-50, -50, 50, -50, 50, 50, -50, 50)
+
 [connection signal="input_event" from="Click Detector" to="." method="_on_Click_Detector_input_event"]
 [connection signal="mouse_entered" from="Click Detector" to="." method="_on_Click_Detector_mouse_entered"]
 [connection signal="mouse_exited" from="Click Detector" to="." method="_on_Click_Detector_mouse_exited"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://c4l323olyrxvh"]
+[gd_scene load_steps=9 format=3 uid="uid://c4l323olyrxvh"]
 
 [ext_resource type="PackedScene" uid="uid://14wh7is6r4gh" path="res://Piece.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://cern4sg6opd8j" path="res://PieceComponents/SnapToMousedSpace.tscn" id="2"]
@@ -6,18 +6,21 @@
 [ext_resource type="PackedScene" uid="uid://l5r0ewjba2y1" path="res://PieceComponents/StaticTexture.tscn" id="4"]
 [ext_resource type="PackedScene" uid="uid://4adthnusgal1" path="res://PieceComponents/InhabitsSpaces.tscn" id="5_mwgg3"]
 [ext_resource type="PackedScene" uid="uid://dvm4cjiwmro84" path="res://PieceComponents/CannotMoveToOccupied.tscn" id="6"]
+[ext_resource type="PackedScene" uid="uid://uv06cctnu225" path="res://PieceComponents/MovesOrthogonally.tscn" id="7_oor6m"]
+[ext_resource type="PackedScene" uid="uid://byuk3cvq30i4h" path="res://PieceComponents/CanMoveToSpaces.tscn" id="8_jircw"]
 
 [node name="Rook" instance=ExtResource("1")]
 piece_name = "Rook"
 
 [node name="SnapToMousedSpace" parent="." index="1" instance=ExtResource("2")]
-component_name = &""
 
 [node name="StaticTexture" parent="." index="2" instance=ExtResource("4")]
 texture = ExtResource("3")
-component_name = &""
 
 [node name="InhabitsSpaces" parent="." index="3" instance=ExtResource("5_mwgg3")]
 
 [node name="CannotMoveToOccupied" parent="." index="4" instance=ExtResource("6")]
-component_name = &""
+
+[node name="MovesOrthogonally" parent="." index="5" instance=ExtResource("7_oor6m")]
+
+[node name="CanMoveToSpaces" parent="." index="6" instance=ExtResource("8_jircw")]

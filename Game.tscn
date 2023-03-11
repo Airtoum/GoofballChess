@@ -9,9 +9,13 @@
 [node name="Board" parent="." instance=ExtResource("1")]
 
 [node name="Rook" parent="Board" instance=ExtResource("4")]
+hover_color = Color(1, 0.866667, 0, 1)
+select_color = Color(0, 1, 0, 1)
 
 [node name="Rook2" parent="Board" instance=ExtResource("4")]
 rotation = 1.5708
+hover_color = Color(1, 0.866667, 0, 1)
+select_color = Color(0, 1, 0, 1)
 
 [node name="Camera2D" parent="." instance=ExtResource("2")]
 speed = 800.0

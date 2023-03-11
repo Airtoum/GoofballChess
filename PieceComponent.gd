@@ -23,5 +23,5 @@ func when_moved(piece: Piece):
 func when_dragged(piece: Piece):
 	pass
 	
-func when_get_moves(piece: Piece, list_of_moves):
+func when_get_moves(piece: Piece, list_of_moves: Array[Move]):
 	pass

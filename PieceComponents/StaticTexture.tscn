@@ -12,5 +12,6 @@ mouse_filter = 2
 expand_mode = 1
 stretch_mode = 5
 script = ExtResource("1")
+inherit_parent_self_modulate = true
 component_name = &"StaticTexture"
 description = "<texture>"

@@ -5,3 +5,4 @@
 [node name="MovesOrthogonally" type="Node"]
 script = ExtResource("1")
 component_name = &"MovesOrthogonally"
+description = " "

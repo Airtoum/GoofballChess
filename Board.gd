@@ -28,8 +28,34 @@ func _ready():
 				var pos = Vector2(100 * i, 100 * j)
 				new_space.position = pos
 				move_space(new_space, Vector2.ZERO, new_space.position)
-				new_space.add_neighbor(Space.BACKWARD & Space.LEFT, spaces_by_pos[pos + Vector2(-100, -100)])
-			
+		for i in range(8):
+			for j in range(8):
+				var pos = Vector2(100 * i, 100 * j)
+				var space = spaces_by_pos[pos][0] as Space
+				for dx in range(-1, 2):
+					for dy in range(-1, 2):
+						var disp = Vector2(100 * dx, 100 * dy)
+						if disp == Vector2.ZERO:
+							continue
+						var link_space = spaces_by_pos.get(pos + disp, [null])[0]
+						if link_space:
+							var direction = 0
+							if dx == -1:
+								direction |= Space.LEFT
+							if dx == 1:
+								direction |= Space.RIGHT
+							if dy == -1:
+								direction |= Space.FORWARD
+							if dy == 1:
+								direction |= Space.BACKWARD
+							space.add_neighbor(direction, link_space)
+		var space_a: Space = spaces_by_pos[Vector2(600, 0)][0]
+		var space_b: Space = spaces_by_pos[Vector2(200, 700)][0]
+		space_a.add_neighbor(Space.FORWARD, space_b)
+		space_b.add_neighbor(Space.BACKWARD, space_a)
+		var space_c: Space = spaces_by_pos[Vector2(600, 700)][0]
+		space_a.add_neighbor(Space.FORWARD, space_c)
+		space_c.add_neighbor(Space.BACKWARD, space_a)
 
 func add_to_game(new_game):
 	if (game):

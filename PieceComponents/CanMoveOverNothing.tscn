@@ -4,4 +4,3 @@
 
 [node name="CanMoveOverNothing" type="Node"]
 script = ExtResource("1")
-component_name = "CanMoveOverNothing"

@@ -8,10 +8,11 @@ extends Node2D
 @onready var InfoBox = $InfoBox
 
 
-var expanding_piece = null
+var expanding_piece: Piece = null
 var expand_timer = 0
 var expand_delay = 0.8
 
+var selected_piece: Piece = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

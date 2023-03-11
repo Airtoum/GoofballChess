@@ -4,4 +4,4 @@
 
 [node name="CanMoveToSpaces" type="Node"]
 script = ExtResource("1")
-component_name = "CanMoveToSpaces"
+component_name = &"CanMoveToSpaces"

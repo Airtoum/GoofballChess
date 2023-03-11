@@ -1,15 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://14wh7is6r4gh"]
+[gd_scene load_steps=5 format=3 uid="uid://14wh7is6r4gh"]
 
-[ext_resource type="Script" path="res://Piece.gd" id="1"]
+[ext_resource type="Script" path="res://Piece.gd" id="1_e3a45"]
+[ext_resource type="Script" path="res://MoveDrawer.gd" id="2_wt5x4"]
+[ext_resource type="PackedScene" uid="uid://bcn6vvdq13dfg" path="res://DebugLabel.tscn" id="3_qdt3p"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(100, 100)
 
 [node name="Piece" type="Node2D"]
 z_index = 10
-script = ExtResource("1")
-hover_color = Color(1, 0.866667, 0, 1)
-select_color = Color(0, 1, 0, 1)
+script = ExtResource("1_e3a45")
 
 [node name="PieceInternals" type="Node2D" parent="."]
 
@@ -26,6 +26,19 @@ offset_right = 50.0
 offset_bottom = 50.0
 
 [node name="ClickTimer" type="Timer" parent="PieceInternals"]
+
+[node name="MoveDrawer" type="Node2D" parent="PieceInternals"]
+z_index = -6
+script = ExtResource("2_wt5x4")
+
+[node name="DebugLabel" parent="PieceInternals" instance=ExtResource("3_qdt3p")]
+offset_left = -42.0
+offset_top = -88.0
+offset_right = 46.0
+offset_bottom = -62.0
+grow_horizontal = 2
+grow_vertical = 2
+debug_path = "../MoveDrawer:num_paths"
 
 [connection signal="input_event" from="PieceInternals/Click Detector" to="." method="_on_click_detector_input_event"]
 [connection signal="mouse_entered" from="PieceInternals/Click Detector" to="." method="_on_Click_Detector_mouse_entered"]
