@@ -13,3 +13,9 @@ func _init(piece: Piece):
 
 func setup_listeners():
 	pass
+	
+func remove_listeners():
+	pass
+	
+func make():
+	pass

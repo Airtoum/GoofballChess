@@ -74,6 +74,9 @@ func when_traversed(piece, direction):
 func link_move(move: Move):
 	if not linked_moves.has(move):
 		linked_moves.append(move)
+		
+func unlink_move(move: Move):
+	linked_moves.erase(move)
 
 var turned_off_debug = true
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -89,9 +92,13 @@ func _process(delta):
 	if moused_over:
 		for move in linked_moves:
 			move.highlight = true
+			if Input.is_action_just_pressed("LMB"):
+				print("SPACE CLICKED")
+				move.make()
 	else:
 		for move in linked_moves:
 			move.highlight = false
+			
 		
 	
 func _draw():

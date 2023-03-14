@@ -2,7 +2,8 @@ extends Node2D
 
 class_name MoveDrawer
 
-var list_of_moves: Array[Move]
+@onready var my_piece: Piece = get_parent().get_parent()
+
 var num_paths: int = 0
 var paths: Array[Move]
 
@@ -20,7 +21,7 @@ func _process(delta):
 func _draw():
 	num_paths = 0
 	paths = []
-	for move in list_of_moves:
+	for move in my_piece.list_of_moves:
 		move = move as Move
 		if not move.highlight:
 			continue

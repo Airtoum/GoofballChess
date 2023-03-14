@@ -16,3 +16,9 @@ func final_space() -> Space:
 func setup_listeners():
 	final_space().link_move(self)
 	
+func remove_listeners():
+	final_space().unlink_move(self)
+	
+func make():
+	print("MAKING MOVE")
+	piece.move_to(final_space().position)

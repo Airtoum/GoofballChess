@@ -18,6 +18,8 @@ var drag_start = position
 var screen_click_start = Vector2.ZERO
 var screen_click_radius = 10
 
+var list_of_moves: Array[Move] = []
+
 var board = null
 
 # Called when the node enters the scene tree for the first time.
@@ -70,7 +72,7 @@ func _input(event):
 				dragged = false
 				emit_dropped()
 				if emit_try_move():
-					move(drag_start, position)
+					move_to(position)
 					emit_moved()
 				else:
 					position = drag_start
@@ -84,16 +86,24 @@ func _input(event):
 					else:
 						deselect()
 
+func move_to(new_pos):
+	position = new_pos
+	move(drag_start, new_pos)
+
 func move(old_pos, new_pos):
 	drag_start = new_pos
 	if board:
 		board.move_piece(self, old_pos, new_pos)
+	deselect()
+	for move in list_of_moves:
+		move.remove_listeners()
 
 func deselect():
 	selected = false
 	if Cursor.selected_piece == self:
 		Cursor.selected_piece = null
 		$PieceInternals/MoveDrawer.hide()
+		$PieceInternals/MoveDrawer.queue_redraw()
 
 func _on_Click_Detector_mouse_entered():
 	moused_over = true
@@ -157,13 +167,12 @@ func emit_dragged():
 		component.when_dragged(self)
 
 func emit_get_moves():
-	var list_of_moves: Array[Move] = []
+	list_of_moves = []
 	for component in all_piece_components():
 		component.when_get_moves(self, list_of_moves)
 	
 	for move in list_of_moves:
 		move.setup_listeners()
-	$PieceInternals/MoveDrawer.list_of_moves = list_of_moves
 	$PieceInternals/MoveDrawer.show()
 	$PieceInternals/MoveDrawer.queue_redraw()
 			
