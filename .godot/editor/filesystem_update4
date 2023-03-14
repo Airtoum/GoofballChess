@@ -1,4 +1,9 @@
 res://default_env.tres
+res://Spaces/Black Space.tscn
+res://Space.gd
+res://SpaceComponent.gd
+res://PieceComponents/MovesOrthogonally.gd
+res://Moves/MoveThroughSpaces.gd
 res://Game.tscn
 res://Pieces/Rook.tscn
 res://Piece.tscn
@@ -15,4 +20,4 @@ res://PieceComponents/SnapToMousedSpace.tscn
 res://PieceComponents/SnapToSpace.tscn
 res://PieceComponents/StaticTexture.tscn
 res://Space.tscn
-res://Spaces/Black Space.tscn
+res://MoveDrawer.gd

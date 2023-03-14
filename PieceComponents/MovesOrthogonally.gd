@@ -21,16 +21,16 @@ func when_get_moves(piece: Piece, list_of_moves: Array[Move]):
 class TraversalData:
 	var past_spaces: Array[Space]
 	var past_dirs: Array[int]
-	var num_loops: int
+	var involves_loop: bool
 	func _init():
 		past_spaces = []
 		past_dirs = []
-		num_loops = 0
+		involves_loop = false
 	func copy():
-		var data = TraversalData.new()
+		var data: TraversalData = TraversalData.new()
 		data.past_spaces = self.past_spaces.duplicate()
 		data.past_dirs = self.past_dirs.duplicate()
-		data.num_loops = self.num_loops
+		data.involves_loop = self.involves_loop
 		return data
 	func count_states(space: Space, dir: int):
 		var count = 0

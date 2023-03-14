@@ -66,6 +66,11 @@ func piece_entered(piece):
 		if child is SpaceComponent:
 			child.when_entered(self, piece)
 			
+func when_traversed(piece, direction):
+	for child in get_children():
+		if child is SpaceComponent:
+			child.when_traversed(self, piece, direction)
+			
 func link_move(move: Move):
 	if not linked_moves.has(move):
 		linked_moves.append(move)

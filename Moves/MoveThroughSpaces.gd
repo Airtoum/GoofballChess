@@ -3,12 +3,12 @@ extends Move
 class_name MoveThroughSpaces
 
 var spaces: Array[Space]
-var num_loops: int
+var in_loop: bool
 
-func _init(piece: Piece, spaces: Array[Space], num_loops = 0):
+func _init(piece: Piece, spaces: Array[Space], in_loop = false):
 	self.piece = piece
 	self.spaces = spaces
-	self.num_loops = num_loops
+	self.in_loop = in_loop
 
 func final_space() -> Space:
 	return spaces.back()

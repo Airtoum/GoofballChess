@@ -19,3 +19,6 @@ func when_exited(space, piece):
 	
 func when_moved(space):
 	pass
+
+func when_traversed(space: Space, piece: Piece, direction: int):
+	pass
