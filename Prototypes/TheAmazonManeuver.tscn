@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://ccaqo6jty02rl"]
+
+[node name="TheAmazonManeuver" type="Node2D"]
+
+[node name="OnPlay" type="Node" parent="."]
+
+[node name="Choose(0)" type="Node" parent="OnPlay"]
+
+[node name="MatchType(Pawn)" type="Node" parent="OnPlay/Choose(0)"]
+
+[node name="AddComponents(0)" type="Node" parent="OnPlay"]
+
+[node name="QueenMovement" type="Node" parent="OnPlay/AddComponents(0)"]
+
+[node name="Activate the queen movement?" type="Node" parent="OnPlay"]

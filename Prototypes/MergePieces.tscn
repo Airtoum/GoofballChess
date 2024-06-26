@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://24gme2eyg3sr"]
+
+[node name="MergePieces" type="Node2D"]
+
+[node name="OnPlay" type="Node" parent="."]
+
+[node name="Choose(0)" type="Node" parent="OnPlay"]
+
+[node name="MatchType(Piece)" type="Node" parent="OnPlay/Choose(0)"]
+
+[node name="AddComponents(0)" type="Node" parent="OnPlay"]
+
+[node name="CanMerge" type="Node" parent="OnPlay/AddComponents(0)"]

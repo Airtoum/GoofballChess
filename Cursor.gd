@@ -50,7 +50,7 @@ func _on_ExpandTimer_timeout():
 	generate_info()
 	
 func generate_info():
-	var elements = []
+	var elements: Array[Element] = []
 	
 	add_title(elements, self.expanding_piece.piece_name)
 	for component in self.expanding_piece.get_children():
@@ -69,7 +69,7 @@ func generate_info():
 	
 	elements.sort_custom(Callable(self,"element_sort"))
 	for element in elements:
-		InfoBox.add_child(element[0])
+		InfoBox.add_child(element.node)
 	
 	if InfoBox.get_child_count() > 0:
 		var last_element = InfoBox.get_child(InfoBox.get_child_count() - 1)
@@ -90,15 +90,21 @@ func search_regex(pattern, string):
 		arr.append(result.get_string())
 	return arr
 	
-func element_sort(a, b):
-	if a[1] < b[1]:
-		return true
-	return false
+func element_sort(a: Element, b: Element):
+	return a.priority < b.priority
 
-func add_element(all_elements, element, priority=50):
+class Element:
+	var node
+	var priority
+	func _init(node, priority):
+		self.node = node
+		self.priority = priority
+
+func add_element(all_elements, element_node, priority=50):
 	var margin = InfoBoxMargin.instantiate()
-	margin.add_child(element)
-	all_elements.append([margin, priority])
+	margin.add_child(element_node)
+	var element = Element.new(margin, priority)
+	all_elements.append(element)
 
 func add_description(all_elements, description, priority=50):
 	if len(description) == 0:

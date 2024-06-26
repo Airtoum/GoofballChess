@@ -7,8 +7,8 @@ class_name Piece
 
 @export var piece_name: String
 
-@export var hover_color: Color
-@export var select_color: Color
+@export var hover_color: Color = Color("ffdd00")
+@export var select_color: Color = Color("00ff00")
 
 var moused_over
 var selected
@@ -50,45 +50,54 @@ func _process(delta):
 	else:
 		self.self_modulate = Color(1,1,1)
 	var mouse_pos = get_global_mouse_position()
-	if dragged:
-		self.global_position = mouse_pos + drag_offset
+	#if dragged:
+	#	self.global_position = mouse_pos + drag_offset
 
 
 func _input(event):
+	# click -> select
+	# when selected, click a space to pick a move
+	# click + drag -> drag
+	# when dragging, release over a space to pick a move
+	# click + drag + release at start position -> select
 	var mouse_pos = get_global_mouse_position()
 	if moused_over:
 		if event is InputEventMouseButton:
 			if event.pressed:
-				dragged = true
-				#deselect()
 				drag_offset = self.global_position - mouse_pos
 				drag_start = self.position
+				drag()
 				get_viewport().set_input_as_handled()
-				Cursor.clear_expand(self)
 				ClickTimer.start()
 				screen_click_start = event.position
-				emit_dragged()
 			else:
 				dragged = false
 				emit_dropped()
-				if emit_try_move():
-					move_to(position)
-					emit_moved()
-				else:
-					position = drag_start
 				var click_diff = event.position - screen_click_start
 				var click_is_close = click_diff.length() < screen_click_radius
-				if ClickTimer.time_left > 0 && click_is_close:
-					selected = !selected
-					if selected:
-						Cursor.selected_piece = self
-						emit_get_moves()
+				if not click_is_close and position != drag_start:
+					if emit_try_move() and false:
+						#move_to(position)
+						pass
 					else:
-						deselect()
+						position = drag_start
+				else:
+					position = drag_start
+				if ClickTimer.time_left > 0 && click_is_close:
+					toggle_select()
+	if dragged:
+		if event is InputEventMouseMotion:
+			self.global_position = mouse_pos + drag_offset
+			var click_diff = event.position - screen_click_start
+			var click_is_close = click_diff.length() < screen_click_radius
+			if not click_is_close:
+				#select()
+				pass
 
-func move_to(new_pos):
+func move_to(new_pos) -> void:
 	position = new_pos
 	move(drag_start, new_pos)
+	emit_moved()
 
 func move(old_pos, new_pos):
 	drag_start = new_pos
@@ -98,12 +107,33 @@ func move(old_pos, new_pos):
 	for move in list_of_moves:
 		move.remove_listeners()
 
+func toggle_select():
+	selected = not selected
+	if selected:
+		select(true)
+	else:
+		deselect()
+
+func select(bypass=false):
+	if not selected or bypass:
+		selected = true
+		Cursor.selected_piece = self
+		emit_get_moves()
+
 func deselect():
 	selected = false
 	if Cursor.selected_piece == self:
 		Cursor.selected_piece = null
 		$PieceInternals/MoveDrawer.hide()
 		$PieceInternals/MoveDrawer.queue_redraw()
+		
+func drag(bypass=false):
+	if not dragged or bypass:
+		dragged = true
+		Cursor.clear_expand(self)
+		emit_dragged()
+		Cursor.selected_piece = self
+		emit_get_moves()
 
 func _on_Click_Detector_mouse_entered():
 	moused_over = true

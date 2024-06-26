@@ -1,0 +1,116 @@
+[gd_scene load_steps=9 format=3 uid="uid://caamia753k31p"]
+
+[ext_resource type="Script" path="res://Entity.gd" id="1_n6wjs"]
+[ext_resource type="Script" path="res://Game.gd" id="1_nkd3x"]
+[ext_resource type="Script" path="res://Components/Position2D.gd" id="2_5ocac"]
+[ext_resource type="Script" path="res://Components/Sprite2D.gd" id="2_exqxl"]
+[ext_resource type="Texture2D" uid="uid://b6sa2kmjhy33f" path="res://Graphics/ArrowFill.svg" id="5_sdwc8"]
+[ext_resource type="Script" path="res://Components/Clickable.gd" id="6_1benc"]
+[ext_resource type="Texture2D" uid="uid://bvm3mjo6adrp6" path="res://Graphics/ArrowOutline.svg" id="6_vaqow"]
+[ext_resource type="Texture2D" uid="uid://xjd5vwms7gj" path="res://Graphics/Square.svg" id="7_aarp6"]
+
+[node name="TestScene2" type="Node2D"]
+
+[node name="Game" type="Node" parent="."]
+script = ExtResource("1_nkd3x")
+
+[node name="Entity" type="Node" parent="Game"]
+script = ExtResource("1_n6wjs")
+
+[node name="cPosition2D" type="Node" parent="Game/Entity"]
+script = ExtResource("2_5ocac")
+
+[node name="Fill" type="Node2D" parent="Game/Entity"]
+modulate = Color(0.776471, 0.776471, 0.776471, 1)
+scale = Vector2(0.222, 0.222)
+script = ExtResource("2_exqxl")
+texture = ExtResource("5_sdwc8")
+normal_color = Color(0.776471, 0.776471, 0.776471, 1)
+selected_color = Color(0.776471, 0.776471, 0.776471, 1)
+primary_selected_color = Color(0.776471, 0.776471, 0.776471, 1)
+hover_color = Color(1, 1, 1, 1)
+hover_selected_color = Color(1, 1, 1, 1)
+hover_primary_selected_color = Color(1, 1, 1, 1)
+
+[node name="Outline" type="Node2D" parent="Game/Entity"]
+modulate = Color(0, 0, 0, 1)
+scale = Vector2(0.222, 0.222)
+script = ExtResource("2_exqxl")
+texture = ExtResource("6_vaqow")
+selected_color = Color(1, 0.360784, 0, 1)
+primary_selected_color = Color(1, 0.615686, 0, 1)
+hover_selected_color = Color(1, 0.360784, 0, 1)
+hover_primary_selected_color = Color(1, 0.615686, 0, 1)
+
+[node name="cClickable" type="Node2D" parent="Game/Entity"]
+visible = false
+script = ExtResource("6_1benc")
+
+[node name="Entity2" type="Node" parent="Game"]
+script = ExtResource("1_n6wjs")
+
+[node name="cPosition2D" type="Node" parent="Game/Entity2"]
+script = ExtResource("2_5ocac")
+vector = Vector2(1, 1)
+
+[node name="cSprite2D" type="Node2D" parent="Game/Entity2"]
+modulate = Color(0.776471, 0.776471, 0.776471, 1)
+scale = Vector2(0.222, 0.222)
+script = ExtResource("2_exqxl")
+texture = ExtResource("7_aarp6")
+normal_color = Color(0.776471, 0.776471, 0.776471, 1)
+selected_color = Color(0.9, 0.7152, 0.648, 1)
+primary_selected_color = Color(0.9, 0.774, 0.648, 1)
+hover_color = Color(1, 1, 1, 1)
+hover_selected_color = Color(1, 0.796078, 0.721569, 1)
+hover_primary_selected_color = Color(1, 0.858824, 0.721569, 1)
+
+[node name="cClickable" type="Node2D" parent="Game/Entity2"]
+visible = false
+script = ExtResource("6_1benc")
+
+[node name="Entity3" type="Node" parent="Game"]
+script = ExtResource("1_n6wjs")
+
+[node name="cPosition2D" type="Node" parent="Game/Entity3"]
+script = ExtResource("2_5ocac")
+vector = Vector2(2, 3)
+
+[node name="cSprite2D" type="Node2D" parent="Game/Entity3"]
+modulate = Color(0.776471, 0.776471, 0.776471, 1)
+scale = Vector2(0.222, 0.222)
+script = ExtResource("2_exqxl")
+texture = ExtResource("7_aarp6")
+normal_color = Color(0.776471, 0.776471, 0.776471, 1)
+selected_color = Color(0.9, 0.7152, 0.648, 1)
+primary_selected_color = Color(0.9, 0.774, 0.648, 1)
+hover_color = Color(1, 1, 1, 1)
+hover_selected_color = Color(1, 0.796078, 0.721569, 1)
+hover_primary_selected_color = Color(1, 0.858824, 0.721569, 1)
+
+[node name="cClickable" type="Node2D" parent="Game/Entity3"]
+visible = false
+script = ExtResource("6_1benc")
+
+[node name="Entity4" type="Node" parent="Game"]
+script = ExtResource("1_n6wjs")
+
+[node name="cPosition2D" type="Node" parent="Game/Entity4"]
+script = ExtResource("2_5ocac")
+vector = Vector2(3, 1)
+
+[node name="cSprite2D" type="Node2D" parent="Game/Entity4"]
+modulate = Color(0.776471, 0.776471, 0.776471, 1)
+scale = Vector2(0.222, 0.222)
+script = ExtResource("2_exqxl")
+texture = ExtResource("7_aarp6")
+normal_color = Color(0.776471, 0.776471, 0.776471, 1)
+selected_color = Color(0.9, 0.7152, 0.648, 1)
+primary_selected_color = Color(0.9, 0.774, 0.648, 1)
+hover_color = Color(1, 1, 1, 1)
+hover_selected_color = Color(1, 0.796078, 0.721569, 1)
+hover_primary_selected_color = Color(1, 0.858824, 0.721569, 1)
+
+[node name="cClickable" type="Node2D" parent="Game/Entity4"]
+visible = false
+script = ExtResource("6_1benc")

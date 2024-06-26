@@ -1,4 +1,4 @@
-extends Node
+extends Node2D
 
 class_name Board
 
@@ -13,6 +13,19 @@ var spaces: Array[Space] = []
 
 var pieces_by_pos = {}
 var spaces_by_pos = {}
+
+var turn_off_debug = false
+func _process(delta):
+	if Global.debug_view:
+		queue_redraw()
+	elif not turn_off_debug:
+		queue_redraw()
+		
+func _draw():
+	if Global.debug_view:
+		for pos in pieces_by_pos:
+			for piece in pieces_by_pos[pos]:
+				draw_circle(pos, 40, Color.GREEN)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -70,8 +83,9 @@ func add_thing(things, things_by_pos, thing):
 	else:
 		things_by_pos[thing.position] = [thing]
 		
-func add_piece(piece):
+func add_piece(piece: Piece):
 	add_thing(pieces, pieces_by_pos, piece)
+	piece.call_deferred("move_to", piece.position)
 	
 func add_space(space):
 	add_thing(spaces, spaces_by_pos, space)

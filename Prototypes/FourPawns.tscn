@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://dnmx3cj8sgnpn"]
+
+[node name="FourPawns" type="Node2D"]
+
+[node name="OnPlay" type="Node" parent="."]
+
+[node name="ChooseMany(0)" type="Node" parent="OnPlay"]
+
+[node name="MatchType(Pawn)" type="Node" parent="OnPlay/ChooseMany(0)"]
+
+[node name="MatchesCount(4)" type="Node" parent="OnPlay/ChooseMany(0)"]
+
+[node name="MatchesInALine" type="Node" parent="OnPlay/ChooseMany(0)"]
+
+[node name="Choose(1)" type="Node" parent="OnPlay"]
+
+[node name="MatchInChoice(0)" type="Node" parent="OnPlay/Choose(1)"]
+
+[node name="Select(2)" type="Node" parent="OnPlay"]
+
+[node name="MatchInChoice(0)" type="Node" parent="OnPlay/Select(2)"]
+
+[node name="MatchNot" type="Node" parent="OnPlay/Select(2)"]
+
+[node name="MatchInChoice(1)" type="Node" parent="OnPlay/Select(2)/MatchNot"]
+
+[node name="Destroy(2, Combine)" type="Node" parent="OnPlay"]
+
+[node name="Promote(1, FourPawns)" type="Node" parent="OnPlay"]

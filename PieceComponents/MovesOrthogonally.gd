@@ -12,6 +12,7 @@ func when_get_moves(piece: Piece, list_of_moves: Array[Move]):
 	if piece.has_component("CanMoveToSpaces") and piece.has_component("InhabitsSpaces"):
 		var inhabits_spaces = piece.get_component("InhabitsSpaces") as PC_InhabitsSpaces
 		var originating_space: Space = inhabits_spaces.inhabiting_space
+		if not originating_space: return
 		for facet_direction in originating_space.facets:
 			var data = TraversalData.new()
 			traverse_spaces(piece, facet_direction, inhabits_spaces.inhabiting_space, data, list_of_moves)

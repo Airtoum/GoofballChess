@@ -1,11 +1,11 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=4 format=3 uid="uid://bv65wrhanihhn"]
 
-[ext_resource path="res://Board.gd" type="Script" id=1]
-[ext_resource path="res://Space.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Spaces/Black Space.tscn" type="PackedScene" id=3]
+[ext_resource type="Script" path="res://Board.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://b0mm6l15d27ll" path="res://Space.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://de1pfyxx546fg" path="res://Spaces/Black Space.tscn" id="3"]
 
 [node name="Board" type="Node2D"]
-script = ExtResource( 1 )
+script = ExtResource("1")
 board_generation = 1
-WhiteSpace = ExtResource( 2 )
-BlackSpace = ExtResource( 3 )
+WhiteSpace = ExtResource("2")
+BlackSpace = ExtResource("3")

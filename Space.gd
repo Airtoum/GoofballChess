@@ -14,7 +14,7 @@ const DIRECTIONS_END = 1 << 6 #64
 var board = null
 
 var moused_over = false
-var neighbors: Dictionary = {} # Dict of [ints (dir bitmasks), arrays of spaces]
+@export var neighbors: Dictionary = {} # Dict of [ints (dir bitmasks), arrays of spaces]
 @export var facets: Array[int]
 @export var ridges: Array[int]
 @export var peaks: Array[int]
@@ -25,6 +25,12 @@ var linked_moves: Array[Move] = []
 func _ready():
 	if get_parent() is Board:
 		add_to_board(get_parent())
+	for dir in neighbors:
+		if neighbors[dir] is NodePath:
+			neighbors[dir] = [get_node(neighbors[dir])]
+		for neighbor in neighbors[dir]:
+			if neighbor is NodePath:
+				neighbor = get_node(neighbor)
 
 func add_to_board(new_board):
 	if (board):
@@ -90,12 +96,16 @@ func _process(delta):
 		turned_off_debug = true
 		
 	if moused_over:
+		var a = 2.0
+		modulate = Color(a, a, 1, a)
 		for move in linked_moves:
 			move.highlight = true
-			if Input.is_action_just_pressed("LMB"):
+			if Input.is_action_just_pressed("LMB") or Input.is_action_just_released("LMB"):
 				print("SPACE CLICKED")
 				move.make()
 	else:
+		modulate = Color(1, 1, 1, 1)
+		scale = Vector2.ONE
 		for move in linked_moves:
 			move.highlight = false
 			

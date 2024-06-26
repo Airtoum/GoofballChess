@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://djswrjqeici4l"]
+
+[node name="MagicPencil" type="Node2D"]
+
+[node name="OnPlay" type="Node" parent="."]
+
+[node name="ChooseMany(0)" type="Node" parent="OnPlay"]
+
+[node name="MatchesPoints(3)" type="Node" parent="OnPlay/ChooseMany(0)"]
+
+[node name="Destroy(0, Sacrifice)" type="Node" parent="OnPlay"]
+
+[node name="Choose(1)" type="Node" parent="OnPlay"]
+
+[node name="MatchType(Rook)" type="Node" parent="OnPlay/Choose(1)"]
+
+[node name="StartTimed(60 seconds, Halt)" type="Node" parent="OnPlay"]
+
+[node name="DrawAComic" type="Node" parent="OnPlay/StartTimed(60 seconds, Halt)"]
+
+[node name="PromoteChoice(1, MagicPencil)" type="Node" parent="OnPlay"]

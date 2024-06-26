@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://dx8bmgtsmimn1"]
+
+[ext_resource type="Script" path="res://Entity.gd" id="1_2kq5b"]
+[ext_resource type="Texture2D" uid="uid://cl7eqrpfcpq4u" path="res://Graphics/WhiteRook.svg" id="2_02qca"]
+[ext_resource type="Script" path="res://Components/Position2D.gd" id="2_peuds"]
+[ext_resource type="Script" path="res://Components/Sprite2D.gd" id="3_3xl0a"]
+[ext_resource type="Script" path="res://Components/Clickable.gd" id="5_v643m"]
+
+[node name="Rook2" type="Node"]
+script = ExtResource("1_2kq5b")
+
+[node name="Position2D" type="Node" parent="." node_paths=PackedStringArray("entity")]
+script = ExtResource("2_peuds")
+entity = NodePath("..")
+
+[node name="Sprite2D" type="Node2D" parent="." node_paths=PackedStringArray("entity")]
+scale = Vector2(0.222, 0.222)
+script = ExtResource("3_3xl0a")
+texture = ExtResource("2_02qca")
+normal_color = Color(1, 1, 1, 1)
+selected_color = Color(0, 1, 0, 1)
+primary_selected_color = Color(0.768627, 1, 0, 1)
+hover_color = Color(1, 1, 0.847059, 1)
+hover_selected_color = Color(0.278431, 1, 0.294118, 1)
+hover_primary_selected_color = Color(0.87451, 1, 0.490196, 1)
+entity = NodePath("..")
+
+[node name="Clickable" type="Node2D" parent="."]
+modulate = Color(0, 0.701961, 0.701961, 0.219608)
+script = ExtResource("5_v643m")

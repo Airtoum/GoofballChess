@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://curts6n7jngly"]
+
+[ext_resource type="Texture2D" uid="uid://cysacd78hedfo" path="res://Graphics/Cursor.png" id="1_n5wsq"]
+
+[node name="Player" type="Node2D"]
+
+[node name="Cursor" type="Sprite2D" parent="."]
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("1_n5wsq")
+centered = false

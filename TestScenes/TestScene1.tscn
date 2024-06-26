@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://cwqh3run407f3"]
+
+[ext_resource type="PackedScene" uid="uid://dx8bmgtsmimn1" path="res://Pieces/Rook2.tscn" id="1_ri8lf"]
+[ext_resource type="Script" path="res://Components/Clickable.gd" id="2_rdl7m"]
+[ext_resource type="Script" path="res://Components/Position2D.gd" id="3_yjs3v"]
+
+[node name="TestScene1" type="Node2D"]
+
+[node name="Rook2" parent="." instance=ExtResource("1_ri8lf")]
+
+[node name="Position2D" parent="Rook2" index="0"]
+vector = Vector2(0.5, 0)
+
+[node name="Rook3" parent="." instance=ExtResource("1_ri8lf")]
+
+[node name="Position2D" parent="Rook3" index="0"]
+vector = Vector2(0, 0.5)
+
+[node name="cClickable" type="Node2D" parent="Rook3"]
+visible = false
+script = ExtResource("2_rdl7m")
+
+[node name="cPosition2D" type="Node" parent="Rook3"]
+script = ExtResource("3_yjs3v")
+vector = Vector2(3, 0)
+
+[node name="Rook4" parent="." instance=ExtResource("1_ri8lf")]
+
+[editable path="Rook2"]
+[editable path="Rook3"]

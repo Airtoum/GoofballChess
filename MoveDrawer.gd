@@ -23,7 +23,7 @@ func _draw():
 	paths = []
 	for move in my_piece.list_of_moves:
 		move = move as Move
-		if not move.highlight:
+		if not move.highlight and not Global.debug_view:
 			continue
 		num_paths += 1
 		paths.append(move)
@@ -33,7 +33,7 @@ func _draw():
 			var piece = move.piece
 			var spaces = move.spaces
 			var in_loop = move.in_loop
-			var start = piece.global_position
+			var start = piece.drag_start
 			for space in spaces:
 				var end = space.global_position
 				var dir = (end - start).normalized() * 5
